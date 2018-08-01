@@ -17,5 +17,8 @@
       <p>Capital: {{p.capital}}, Continente: {{p.region}}</p>
     </ion-item>
   </ion-list>
-  
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
