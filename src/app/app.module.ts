@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { PaisesProvider } from '../providers/paises/paises';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { PaisesProvider } from '../providers/paises/paises';
   providers: [
     StatusBar,
     SplashScreen,
+    Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PaisesProvider
   ]
