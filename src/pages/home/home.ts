@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { PaisesProvider } from '../../providers/paises/paises';
 import { HttpClient } from '@angular/common/http';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Vibration } from '@ionic-native/vibration';
 
 @Component({
   selector: 'page-home',
@@ -16,13 +17,17 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     private httpClient: HttpClient,
     private paisesProvider: PaisesProvider,
-    private push: Push
+    private push: Push,
+    private vibration: Vibration
   ) {
         this.push.hasPermission().then((res: any) => {
           if (res.isEnabled) {
           alert('Tem Permissão');
               const options: PushOptions = {
-                  android: {},
+                  android: {
+                    vibrate:true,
+                    topics:['my-app']
+                  },
                   ios: {
                       alert: 'true',
                       badge: true,
@@ -37,7 +42,8 @@ export class HomePage {
           const pushObject: PushObject = this.push.init(options);
           
           pushObject.on('notification').subscribe((notification: any) => {
-            alert(notification.message) 
+             alert(notification.message) 
+             this.vibration.vibrate(1000);
           });
 
           pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
