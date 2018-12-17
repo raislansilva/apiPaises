@@ -42,8 +42,7 @@ export class HomePage {
           const pushObject: PushObject = this.push.init(options);
           
           pushObject.on('notification').subscribe((notification: any) => {
-             alert(notification.message) 
-             this.vibration.vibrate(1000);
+             alert(notification.message)
           });
 
           pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
